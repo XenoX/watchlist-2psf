@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <b>Name:</b> {{ checklist.name }}
+    <div class="mt-2">
+        <b>Items:</b>
+        <ul class="list-group">
+            {% for item in checklist.items %}
+                <li class="list-group-item">
+                    {{ item.name }}
+                    {% if item.done %}
+                        <i class="fa fa-check text-success"></i>
+                    {% endif %}
+                    <a href="{{ path('app_item_delete', {'id': item.id}) }}">
+                        <i class="float-end fa fa-trash text-danger"></i>
+                    </a>
+                </li>
+            {% else %}
+                Aucun item
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mt-2">
+        <b>Categories:</b>
+        <ul class="list-group">
+            {% for category in checklist.categories %}
+                <li class="list-group-item">
+                    <span style="color:{{ category.color }};">
+                        {{ category.name }}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <h2 class="my-3">Ajouter un item</h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

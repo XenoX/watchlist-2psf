@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Checklists{% endblock %}
+
+{% block body %}
+    <h1>Liste des Checklists ✅</h1>
+
+    <p>
+        <a href="{{ path('app_checklist_create') }}">Ajouter une checklist</a>
+    </p>
+
+    <ul class="list-group">
+        {% for checklist in checklists %}
+            <li class="list-group-item">
+                <a href="{{ path('app_checklist_show', {'id': checklist.id}) }}">
+                    {{ checklist.name }}
+                </a>
+                <a class="float-end" href="{{ path('app_checklist_delete', {'id': checklist.id}) }}">
+                    <i class="fa fa-trash text-danger"></i>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
